@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/laytout_fileInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/editText_edit_file"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/EditText_edit_file_hint"
+            android:inputType="text" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/laytout_floor1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/laytout_fileInput">
+
+        <Button
+            android:id="@+id/btn_decrypt_file"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btn_decrypt_file_text" />
+
+        <Button
+            android:id="@+id/btn_encrypt_file"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btn_encrypt_file_text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/laytout_locations"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100px"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/laytout_floor1">
+
+        <TextView
+            android:id="@+id/textview_pdahook_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/editText_loc_longitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="经度119."
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/editText_loc_latitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="纬度29."
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/editText_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="中国浙江省金华市金东区广顺街800号" />
+
+        <EditText
+            android:id="@+id/editText_device_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="12345678" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/laytout_floor3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/laytout_locations">
+
+        <Button
+            android:id="@+id/btn_loc_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="确认" />
+
+        <Button
+            android:id="@+id/btn_loc_clear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="清空" />
+
+        <Button
+            android:id="@+id/btn_loc_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="启用" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/laytout_apptest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100px"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/laytout_floor3">
+
+        <LinearLayout
+            android:id="@+id/laytout_apptest_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100px"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editText__class_-check"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="查询方法的类"/>
+
+            <Button
+                android:id="@+id/btn_class_check"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="查询" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/laytout_apptest_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editText_method_check"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="查询被调用堆栈的方法" />
+
+            <Button
+                android:id="@+id/btn_method_confirm"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="确认" />
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
