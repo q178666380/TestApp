@@ -1,4 +1,4 @@
-package cc.android.testapp.xp.hooker.edit_text;
+package cc.android.testapp.xp.hooker.textmodify;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
@@ -12,14 +12,13 @@ import android.text.SpannableString;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import javax.annotation.Nullable;
 
 import cc.android.testapp.R;
 import cc.android.testapp.xp.MainHook;
@@ -45,8 +44,6 @@ public final class ETDiaLog extends AlertDialog implements View.OnClickListener
         this.mContent = pContent;
         this.mOwner = pOwner;
         this.mListener = pListener;
-
-        //MainHook.injectModuleResources(Util.getAttachedActivityFromView(this.mOwner).getResources());
     }
 
     public void highLightView(ViewGroup viewGroup) {
@@ -69,19 +66,18 @@ public final class ETDiaLog extends AlertDialog implements View.OnClickListener
 
         View tView = this.getLayoutInflater().inflate(
                 MainHook.TAResource.getLayout(R.layout.edit_text), null);
-        this.getWindow().setBackgroundDrawable(BG);
+        if (this.getWindow() != null) this.getWindow().setBackgroundDrawable(BG);
         this.setContentView(tView);
 
+        this.mET_Content = ETCfg.ignoreEdit((EditText) findViewById(R.id.et_edittext_text));
+        this.mBTN_Apply = ETCfg.ignoreEdit((Button) findViewById(R.id.btn_edittext_apply));
+        this.mBTN_OriginClick = ETCfg.ignoreEdit((Button) findViewById(R.id.btn_edittext_origin_click));
+        this.mCB_HighLight = ETCfg.ignoreEdit((CheckBox) findViewById(R.id.cb_edittext_highlight));
+        this.mCB_LockText = ETCfg.ignoreEdit((CheckBox) findViewById(R.id.cb_edittext_lock_text));
 
-        this.mET_Content = ETUtil.ignoreEdit((EditText) findViewById(R.id.et_edittext_text));
-        this.mBTN_Apply = ETUtil.ignoreEdit((Button) findViewById(R.id.btn_edittext_apply));
-        this.mBTN_OriginClick = ETUtil.ignoreEdit((Button) findViewById(R.id.btn_edittext_origin_click));
-        this.mCB_HighLight = ETUtil.ignoreEdit((CheckBox) findViewById(R.id.cb_edittext_highlight));
-        this.mCB_LockText = ETUtil.ignoreEdit((CheckBox) findViewById(R.id.cb_edittext_lock_text));
-
-        this.mCB_HighLight.setChecked(ETUtil.canHighLight(this.mOwner));
+        this.mCB_HighLight.setChecked(ETCfg.canHighLight(this.mOwner));
         this.mCB_HighLight.setOnCheckedChangeListener(this);
-        this.mCB_LockText.setChecked(ETUtil.isTextLocked(this.mOwner));
+        this.mCB_LockText.setChecked(ETCfg.isTextLocked(this.mOwner));
         this.mBTN_Apply.setOnClickListener(this);
 
         if (this.mListener == null) this.mBTN_OriginClick.setEnabled(false);
@@ -99,8 +95,8 @@ public final class ETDiaLog extends AlertDialog implements View.OnClickListener
                 ETDiaLog.this.dismiss();
                 return;
             }
-            if (mCB_LockText.isChecked()) ETUtil.lockText(this.mOwner, tStr);
-            else ETUtil.lockText(this.mOwner, null);
+            if (mCB_LockText.isChecked()) ETCfg.lockText(this.mOwner, tStr);
+            else ETCfg.lockText(this.mOwner, null);
             this.mOwner.setText(new SpannableString(tStr));
             Toast.makeText(this.getContext(), "已应用", LENGTH_SHORT).show();
             ETDiaLog.this.dismiss();
@@ -112,7 +108,7 @@ public final class ETDiaLog extends AlertDialog implements View.OnClickListener
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean pChecked) {
-        ETUtil.setHighLight(pChecked);
+        ETCfg.setHighLight(pChecked);
         this.highLightView((ViewGroup) this.mOwner.getRootView());
     }
 
@@ -120,10 +116,9 @@ public final class ETDiaLog extends AlertDialog implements View.OnClickListener
     public void show() {
         super.show();
         Window window = getWindow();
-        if (window == null) {
-            return;
+        if (window != null) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         }
-        window.clearFlags(131080);
-        window.setSoftInputMode(4);
     }
 }

@@ -3,4 +3,7 @@
     <item
         android:id="@+id/menu_enable_edit"
         android:title="启用文字编辑" />
+    <item
+        android:id="@+id/menu_enable_fileLog"
+        android:title="启用文本日志" />
 </menu>

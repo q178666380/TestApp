@@ -1,4 +1,4 @@
-package cc.android.testapp;
+package cc.android.testapp.act;
 
 import android.app.Activity;
 import android.content.ClipData;
@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import cc.android.testapp.R;
 import cc.android.testapp.util.RealPathFromUriUtils;
 import cc.commons.util.IOUtil;
 

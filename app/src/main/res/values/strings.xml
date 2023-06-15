@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">TestApp</string>
+    <string name="app_pack">cc.android.testapp</string>
     <string name="EditText_edit_file_hint">请输入文件名</string>
     <string name="btn_decrypt_file_text">解密</string>
     <string name="btn_encrypt_file_text">加密</string>
-    <string name="title_activity_carame">CarameActivity</string>
-    <string name="title_activity_camera">CameraActivity</string>
+    <string name="title_activity_carame">CameraActivity</string>
 </resources>
